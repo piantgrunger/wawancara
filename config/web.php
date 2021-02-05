@@ -9,12 +9,14 @@ $config = [
     'name' => 'Application',
     // set target language to be Indonesia
   'language' => 'id-ID',
+    // set source language to be English
+    'sourceLanguage' => 'en-US',
     'as access' => [
      'class' => '\hscstudio\mimin\components\AccessControl',
      'allowActions' => [
         // add wildcard allowed action here!
         'gii/*',
-        'site/*',
+        //'site/*',
         'debug/*',
         'mimin/*', // only in dev mode
     ],
@@ -84,8 +86,7 @@ $config = [
      
    ], 
 
-  // set source language to be English
-  'sourceLanguage' => 'en-US',
+
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [

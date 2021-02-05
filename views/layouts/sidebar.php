@@ -15,6 +15,15 @@
               ['label' => 'Role', 'icon' => 'users', 'url' => ['/mimin/role/'], 'visible' => !Yii::$app->user->isGuest],
               ['label' => 'User', 'icon' => 'user', 'url' => ['/user/index'], 'visible' => !Yii::$app->user->isGuest],
                   ], ],
+                  [
+                    'visible' => !Yii::$app->user->isGuest,
+                    'label' => 'Master',
+                    'url' => '#',
+                    'items' => [
+                ['label' => 'Peserta', 'icon' =>  'user-circle', 'url' => ['/peserta/index'],'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Sekolah', 'icon' =>  'university', 'url' => ['/sekolah/index'],'visible' => !Yii::$app->user->isGuest],
+         
+                ]]
  
           ];
 

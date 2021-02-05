@@ -14,6 +14,14 @@ $menuItems =
                     ['label' => 'User', 'icon' => ' fa fa-circle-o', 'url' => ['/mimin/user/'],'visible' => !Yii::$app->user->isGuest],
                    ]]
                         ,
+                  [
+                            'visible' => !Yii::$app->user->isGuest,
+                            'label' => 'Master',
+                            'icon' => 'fa fa-cogs',
+                            'url' => '#',
+                            'items' => [
+                        ['label' => 'App. Route', 'icon' =>  'fa fa-people', 'url' => ['/peserta/index'],'visible' => !Yii::$app->user->isGuest],
+                         ]]
                 ];     
                 
  if (!Yii::$app->user->isGuest)
