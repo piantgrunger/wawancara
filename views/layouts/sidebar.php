@@ -22,7 +22,9 @@
                     'items' => [
                 ['label' => 'Peserta', 'icon' =>  'user-circle', 'url' => ['/peserta/index'],'visible' => !Yii::$app->user->isGuest],
                 ['label' => 'Sekolah', 'icon' =>  'university', 'url' => ['/sekolah/index'],'visible' => !Yii::$app->user->isGuest],
-         
+               ['label' => 'Elemen', 'icon' =>  'list', 'url' => ['/elemen/index'],'visible' => !Yii::$app->user->isGuest],
+               ['label' => 'Indikator', 'icon' =>  'check', 'url' => ['/indikator/index'],'visible' => !Yii::$app->user->isGuest],
+                
                 ]]
  
           ];
