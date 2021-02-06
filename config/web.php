@@ -16,7 +16,9 @@ $config = [
      'allowActions' => [
         // add wildcard allowed action here!
         'gii/*',
-        //'site/*',
+        'datecontrol/*',
+        'site/login',
+        'site/logout',
         'debug/*',
         'mimin/*', // only in dev mode
     ],
@@ -126,6 +128,7 @@ $config = [
             //'enableAutoLogin' => true,
             'enableSession' => true,
             'authTimeout' => 60*30,
+            'loginUrl'=>['/site/login-wawancara'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\LoginWawancara;
 use app\models\ContactForm;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
@@ -89,6 +90,27 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Logs in a user.
+     *
+     * @return mixed
+     */
+    public function actionLoginWawancara()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginWawancara();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goHome();
+        } else {
+            return $this->render('login-wawancara', [
                 'model' => $model,
             ]);
         }

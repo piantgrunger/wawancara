@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
         'data' =>(ArrayHelper::map(Elemen::find()->asArray()->all(), 'id', 'nama')),
         'options' => [
         'placeholder' => 'Pilih Elemen ...',
-        ],])
+        ],])->label('Elemen')
  ?>
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>

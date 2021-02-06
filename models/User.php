@@ -58,10 +58,11 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return [
 			[['username', 'email'], 'required'],
-			[['username', 'email', 'password_hash','nama','nip','nidn','id_peneliti'], 'string', 'max' => 255],
+			[['username', 'email', 'password_hash'], 'string', 'max' => 255],
 			[['username', 'email'], 'unique'],
 			[['email'], 'email'],
-			['status','integer'],
+            ['status','integer'],
+            [['id_sekolah','tanggal_lahir'],'safe'],
 			[['old_password', 'new_password', 'repeat_password'], 'string', 'min' => 6],
 			[['repeat_password'], 'compare', 'compareAttribute' => 'new_password'],
 			[['old_password', 'new_password', 'repeat_password'], 'required', 'when' => function ($model) {
@@ -69,8 +70,7 @@ class User extends ActiveRecord implements IdentityInterface
 			}, 'whenClient' => "function (attribute, value) {
                 return ($('#user-new_password').val().length>0);
             }"],
-            [['id_reviewer','id_peneliti'],'integer']
-			//['username', 'filter', 'filter' => 'trim'],
+        	//['username', 'filter', 'filter' => 'trim'],
 			//['username', 'unique', 'targetClass' => '\app\models\User', 'message' => 'This username has already been taken.'],
 		];
 	}
