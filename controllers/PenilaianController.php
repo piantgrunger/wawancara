@@ -50,6 +50,8 @@ class PenilaianController extends \yii\web\Controller
 
     public function actionElemen($id)
     {
+        $this->layout='main-penelitian';
+ 
         $peserta = Peserta::findOne($id);
         $elemen = ArrayHelper::map((Elemen::find()->asArray()->all()), 'id', 'nama');
         $model = new \yii\base\DynamicModel([
@@ -73,6 +75,7 @@ class PenilaianController extends \yii\web\Controller
 
     public function actionNilai($id)
     {
+        $this->layout='main-penelitian';
         $session = Yii::$app->session;
         if(!isset($session['elemen-' . $id]))
         {
@@ -80,7 +83,7 @@ class PenilaianController extends \yii\web\Controller
         }
 
         $peserta=Peserta::findOne($id);
-        $indikator=Indikator::find()->where(['in','id_elemen',$session['elemen-' . $id]])->all();
+        $indikator=Indikator::find()->where(['in','id_elemen',$session['elemen-' . $id]])->orderBy("id_elemen,id")->all();
         return $this->render('nilai', [
             'peserta' => $peserta,
             'indikator' => $indikator,

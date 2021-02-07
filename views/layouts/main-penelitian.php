@@ -9,7 +9,7 @@ use app\assets\AppAsset;
 use yii\helpers\Url;
 use app\widgets\Alert;
 
-$this->title = 'SITASA';
+$this->title = 'Applikasi Wawancara';
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -54,7 +54,7 @@ AppAsset::register($this);
 
         <?php if (!Yii::$app->user->isGuest) { ?>
         <div class="main-sidebar">
-          <?=$this->render("sidebar-proposal")?>
+          <?=$this->render("sidebar-penelitian")?>
         </div>
         <?php }  ?>
 

@@ -61,7 +61,7 @@ PenilaianAsset::register($this);
                 <div class="card-footer text-muted">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6">
-                            <button id="nav-prev" class="btn btn-success disabled float-left"><i class="fa fa-angle-double-left"></i> Sebelumnya</button>
+                            <button id="nav-prev-<?=$nomor?>" data-destination="<?=$nomor-1?>" class="btn btn-navigation btn-success <?=(($nomor-1)>0)?"":"disabled"?>  float-left"><i class="fa fa-angle-double-left"></i> Sebelumnya</button>
                         </div>
 
 
@@ -70,7 +70,7 @@ PenilaianAsset::register($this);
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-6 text-right">
 
-                            <button id="nav-next" class="btn btn-success float-right">Selanjutnya <i class="fa fa-angle-double-right"></i></button>
+                            <button id="nav-next-<?=$nomor?>" data-destination="<?=$nomor+1?>" class="btn btn-navigation btn-success <?=(($nomor+1)<=count($indikator))?"":"disabled"?> float-right">Selanjutnya <i class="fa fa-angle-double-right"></i></button>
                         </div>
                     </div>
 
@@ -90,7 +90,7 @@ PenilaianAsset::register($this);
 <?php $nomor++;
         } ?>
 
-
+       
 
 </div>
 </div>
