@@ -36,9 +36,10 @@ PenilaianAsset::register($this);
 
         <?php
         $nomor = 1;
+        $elemen ='';
         foreach ($indikator as $soal) {
         ?>
-            <div class="card d-none card-soal" data-no="<?= $nomor ?>">
+            <div class="card d-none card-soal" data-no="<?= $nomor ?>" data-elemen="<?=($elemen== $soal->id_elemen)?0:$soal->id_elemen ?>" >
                 <div class="card-header h4 bg-info text-white"> Elemen : <?= $soal->elemen->nama ?></div>
                 <div class="card-body">
                     <h5 class="card-title">Indikator : <?= $soal->nama ?></h5>
@@ -82,12 +83,10 @@ PenilaianAsset::register($this);
 
 
 
-    </div>
-</div>
-
 
 
 <?php $nomor++;
+       $elemen=$soal->id_elemen;
         } ?>
 
        

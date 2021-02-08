@@ -54,7 +54,7 @@ AppAsset::register($this);
 
         <?php if (!Yii::$app->user->isGuest) { ?>
         <div class="main-sidebar">
-          <?=$this->render("sidebar-penelitian")?>
+          <?=$this->render("sidebar-penilaian")?>
         </div>
         <?php }  ?>
 

@@ -6,5 +6,5 @@ return [
     'bsVersion' =>'4.x',
 	'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
-    'id_proposal' =>'0',
+    'pesertaWawancara' => null,
 ];

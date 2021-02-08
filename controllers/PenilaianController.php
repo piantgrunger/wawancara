@@ -75,7 +75,7 @@ class PenilaianController extends \yii\web\Controller
 
     public function actionNilai($id)
     {
-        $this->layout='main-penelitian';
+        $this->layout='main-penilaian';
         $session = Yii::$app->session;
         if(!isset($session['elemen-' . $id]))
         {
@@ -84,6 +84,11 @@ class PenilaianController extends \yii\web\Controller
 
         $peserta=Peserta::findOne($id);
         $indikator=Indikator::find()->where(['in','id_elemen',$session['elemen-' . $id]])->orderBy("id_elemen,id")->all();
+        $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
+        
+        $this->view->params['peserta'] = $peserta;
+        $this->view->params['elemen'] = $elemen;
+        
         return $this->render('nilai', [
             'peserta' => $peserta,
             'indikator' => $indikator,
