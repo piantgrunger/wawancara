@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\helpers\Url;
 
 
 ?>
@@ -9,21 +10,11 @@
     <div class="jumbotron">
         <h1>SELAMAT DATANG!</h1>
 
+        <a href="<?=Url::to(['/penilaian/index'])?>" class="btn btn-success">Mulai Penilaian</a>
+
         
 
     </div>
 
-    <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-
-
-            </div>
-            <div class="col-lg-4">
-            </div>
-            </div>
-        </div>
-
-    </div>
 </div>

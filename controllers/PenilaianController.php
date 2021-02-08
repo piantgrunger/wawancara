@@ -50,7 +50,7 @@ class PenilaianController extends \yii\web\Controller
 
     public function actionElemen($id)
     {
-        $this->layout='main-penelitian';
+      
  
         $peserta = Peserta::findOne($id);
         $elemen = ArrayHelper::map((Elemen::find()->asArray()->all()), 'id', 'nama');
