@@ -3,13 +3,16 @@
 use app\assets\PenilaianAsset;
 use app\models\DetailIndikator;
 use yii\bootstrap4\ActiveForm;
+use app\models\Nilai;
+use app\models\Peserta;
 use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
 $this->title = Yii::t('app', 'Indikator Penilaian');
 $this->params['breadcrumbs'][] = $this->title;
 PenilaianAsset::register($this);
-
+$id_penilai= Yii::$app->user->identity->id;
+$peserta = $this->params['peserta'];
 
 
 ?>
@@ -48,8 +51,22 @@ PenilaianAsset::register($this);
                         <div class="card-text col-md-6 h5">
                             <?= Html::radioList(
                                 'jawaban',
-                                null,
-                                ArrayHelper::map(DetailIndikator::find()->where(['id_indikator' => $soal->id])->asArray()->all(), 'nilai', 'jawaban')
+                                Nilai::getNilaiPeserta($id_penilai,$peserta->id,$soal->id),
+                                ArrayHelper::map(DetailIndikator::find()->where(['id_indikator' => $soal->id])->asArray()->all(),
+                                 'nilai', 'jawaban'),
+                                 [
+                                    'item' => function($index, $label, $name, $checked, $value) use($soal,$peserta) {
+
+                                        $return = '<label class="modal-radio">';
+                                        $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" class="radio-wawancara" data-indikator="'.$soal->id.'" data-peserta"'.$peserta->id.'" data-pewawancara"'.Yii::$app->user->identity->id.'" >';
+                                        $return .= '<i></i>';
+                                        $return .= '<span>' . ucwords($label) . '</span>';
+                                        $return .= '</label><br>';
+    
+                                        return $return;
+                                    }
+                                ]
+                                 
                             ) ?>
 
 

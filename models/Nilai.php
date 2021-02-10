@@ -84,4 +84,10 @@ class Nilai extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Peserta::className(), ['id' => 'id_peserta']);
     }
+
+    public static function getNilaiPeserta($id_penilai,$id_peserta,$id_indikator)
+    {
+        $nilai= Nilai::find()->where(['id_penilai'=>$id_penilai,'id_peserta'=>$id_peserta,'id_indikator'=>$id_indikator])->one();
+        return $nilai?$nilai->nilai:null;
+    }
 }
