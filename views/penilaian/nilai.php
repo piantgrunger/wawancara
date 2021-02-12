@@ -5,8 +5,9 @@ use app\models\DetailIndikator;
 use yii\bootstrap4\ActiveForm;
 use app\models\Nilai;
 use app\models\Peserta;
-use yii\bootstrap4\Html;
+use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 $this->title = Yii::t('app', 'Indikator Penilaian');
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,7 +18,7 @@ $peserta = $this->params['peserta'];
 
 ?>
 
-<div id="nilai">
+<div id="blok-nilai" data-url="<?=Url::to(['api/nilai'])?>">
     <div class="card h4">
         <div class="card-header">Pewawancara : <?= Yii::$app->user->identity->username ?></div>
     </div>
@@ -55,12 +56,13 @@ $peserta = $this->params['peserta'];
                                 ArrayHelper::map(DetailIndikator::find()->where(['id_indikator' => $soal->id])->asArray()->all(),
                                  'nilai', 'jawaban'),
                                  [
-                                    'item' => function($index, $label, $name, $checked, $value) use($soal,$peserta) {
+                                    'item' => function($index, $label, $name, $checked, $value) use($soal,$peserta,$nomor) {
+                                        $checked = ($checked) ? 'checked' : '';
 
                                         $return = '<label class="modal-radio">';
-                                        $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" class="radio-wawancara" data-indikator="'.$soal->id.'" data-peserta"'.$peserta->id.'" data-pewawancara"'.Yii::$app->user->identity->id.'" >';
+                                        $return .= '<input type="radio"  name="' . $name.'-'.$nomor . '" value="' . $value . '" class="radio-wawancara" data-indikator="'.$soal->id.'" data-peserta="'.$peserta->id.'" data-penilai="'.Yii::$app->user->identity->id.'" '.$checked.' >';
                                         $return .= '<i></i>';
-                                        $return .= '<span>' . ucwords($label) . '</span>';
+                                        $return .= '<span> ' .($label) . ' </span>';
                                         $return .= '</label><br>';
     
                                         return $return;
@@ -88,7 +90,14 @@ $peserta = $this->params['peserta'];
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-6 text-right">
 
+                           <?php if(($nomor+1)<=count($indikator)) {?>
+
                             <button id="nav-next-<?=$nomor?>" data-destination="<?=$nomor+1?>" class="btn btn-navigation btn-success <?=(($nomor+1)<=count($indikator))?"":"disabled"?> float-right">Selanjutnya <i class="fa fa-angle-double-right"></i></button>
+                           <?php } else {
+                            ?>
+                            <a id="nav-finish" href="<?=Url::to(['finish','id'=>$peserta->id])?>" data-method="POST" data-confirm="Apakah Anda yakin ingin menyelesaikan sesi ini??" class="btn btn-navigation btn-danger  float-right">Selesaikan Sesi Wawancara </a>
+                    
+                            <?php } ?> 
                         </div>
                     </div>
 

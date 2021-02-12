@@ -5,6 +5,40 @@ const _BLOKSOAL = '#blok-soal';
 const _BUTTONNAV = '.btn-navigation'
 const _BUTTONFIRST= '#nav-first';
 const _BUTTONELEMEN = '.btn-elemen';
+const _RADIOWAWANCARA = '.radio-wawancara';
+const _BLOKNILAI = '#blok-nilai';
+
+$(_RADIOWAWANCARA).click(function(o){
+  target = o.currentTarget;
+  var url = $(_BLOKNILAI).data('url');
+  var indikator = $(target).data('indikator');
+  var penilai = $(target).data('penilai');
+  var peserta = $(target).data('peserta');
+  var nilai = $(target).val();
+     // Request
+     var req = $.ajax({
+      url: url
+      , data: {
+        indikator : indikator,
+        penilai : penilai,
+        peserta : peserta,
+        nilai : nilai
+
+      }
+      , dataType: 'json'
+      , type: 'post'
+  });
+
+   req.done(function(data) {
+     target.prop('checked',true);
+  })
+
+
+
+
+
+
+})
 
 
 $(_BUTTONELEMEN).click(function(o){

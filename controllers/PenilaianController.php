@@ -5,13 +5,28 @@ use Yii;
 
 use app\models\Elemen;
 use app\models\Indikator;
+use app\models\Nilai;
 use app\models\Peserta;
 use yii\base\DynamicModel;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
+use yii\filters\VerbFilter;
 
 class PenilaianController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'finish' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+ 
     public function actionIndex()
     {
         $model = new \yii\base\DynamicModel([
@@ -79,7 +94,7 @@ class PenilaianController extends \yii\web\Controller
         $session = Yii::$app->session;
         if(!isset($session['elemen-' . $id]))
         {
-            return $this->goBack();
+            return $this->goHome();
         }
 
         $peserta=Peserta::findOne($id);
@@ -88,7 +103,8 @@ class PenilaianController extends \yii\web\Controller
         
         $this->view->params['peserta'] = $peserta;
         $this->view->params['elemen'] = $elemen;
-        
+        Yii::$app->session['indikator'] = $indikator;
+
         return $this->render('nilai', [
             'peserta' => $peserta,
             'indikator' => $indikator,
@@ -96,6 +112,25 @@ class PenilaianController extends \yii\web\Controller
         ]);
 
 
+    }
+    public function actionFinish($id) {
+
+        if(isset(Yii::$app->session['indikator'])) {
+           $indikator = Yii::$app->session['indikator'];
+           foreach($indikator as $data) {
+              $nilai =  Nilai::find()->where(['id_penilai'=>Yii::$app->user->identity,'id_indikator'=>$data->id,'id_peserta'=>$id ])->one();
+              if($nilai)
+              {
+                  $nilai->status=2;
+                  $nilai->save(false);
+              }
+
+
+           }
+
+
+        }
+       return $this->goHome();
     }
 }
 

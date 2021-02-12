@@ -34,7 +34,7 @@ class Nilai extends \yii\db\ActiveRecord
     {
         return [
             [['id_peserta', 'id_penilai', 'id_indikator'], 'required'],
-            [['id_peserta', 'id_penilai', 'id_indikator', 'nilai'], 'integer'],
+            [['id_peserta', 'id_penilai', 'id_indikator', 'nilai','status'], 'integer'],
             [['id_indikator'], 'exist', 'skipOnError' => true, 'targetClass' => Indikator::className(), 'targetAttribute' => ['id_indikator' => 'id']],
             [['id_penilai'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_penilai' => 'id']],
             [['id_peserta'], 'exist', 'skipOnError' => true, 'targetClass' => Peserta::className(), 'targetAttribute' => ['id_peserta' => 'id']],
