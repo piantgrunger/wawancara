@@ -1,6 +1,6 @@
 <?php
 
-use \kartik\datecontrol\Module;
+
 
 $params = require(__DIR__ . '/params.php');
 
@@ -27,7 +27,8 @@ $config = [
 
     
    'modules' => [
-        'datecontrol' =>  [
+/*
+    'datecontrol' =>  [
         'class' => 'kartik\datecontrol\Module',
  
         // format settings for displaying each date attribute (ICU format example)
@@ -71,7 +72,7 @@ $config = [
                 ]
             ]
        ]
-    ],  
+    ],  */
        
        
    'gridview' =>  [
