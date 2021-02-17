@@ -42,14 +42,16 @@ $peserta = $this->params['peserta'];
         ?>
 
             <div class="card d-none card-soal" data-no="<?= $nomor ?>" data-elemen="<?= ($elemen == $soal->id_elemen) ? 0 : $soal->id_elemen ?>">
+            <!--
                 <div class="card-header h4 bg-info text-white"> Elemen : <?= $soal->elemen->nama ?></div>
                 <div class="card-header bg-primary text-white h5">Indikator : <?= $soal->nama ?></div>
+                -->
                 <div class="card-body">
 
                     <div class="row">
-                        <p class="card-text col-md-6 h5">Pertanyaan : <?= $soal->pertanyaan ?></p>
-                        <div class="card-text col-md-6 h5">
-                        Jawaban : <br>
+                        <p class="card-text col-md-12 h5"> <?= $soal->pertanyaan ?></p>
+                        <div class="card-text form-group h5">
+                        
                             <?= Html::radioList(
                                 'jawaban',
                                 Nilai::getNilaiPeserta($id_penilai, $peserta->id, $soal->id),
@@ -74,10 +76,10 @@ $peserta = $this->params['peserta'];
 
                             ) ?>
 
-
+    
                         </div>
                     </div>
-
+          
 
 
                 </div>

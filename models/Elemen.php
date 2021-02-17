@@ -11,6 +11,9 @@ use Yii;
  * @property string $nama
  * @property float $nilai
  * @property float $prasyarat_minimal
+ *
+ * @property Indikator[] $indikators
+ * @property UserElemen[] $userElemens
  */
 class Elemen extends \yii\db\ActiveRecord
 {
@@ -32,7 +35,6 @@ class Elemen extends \yii\db\ActiveRecord
             [['nilai', 'prasyarat_minimal'], 'number'],
             [['nama'], 'string', 'max' => 255],
             [['nama'], 'unique'],
-           
         ];
     }
 
@@ -47,5 +49,25 @@ class Elemen extends \yii\db\ActiveRecord
             'nilai' => 'Nilai',
             'prasyarat_minimal' => 'Prasyarat Minimal',
         ];
+    }
+
+    /**
+     * Gets query for [[Indikators]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndikators()
+    {
+        return $this->hasMany(Indikator::className(), ['id_elemen' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserElemens]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserElemens()
+    {
+        return $this->hasMany(UserElemen::className(), ['id_elemen' => 'id']);
     }
 }

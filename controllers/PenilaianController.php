@@ -51,7 +51,7 @@ class PenilaianController extends \yii\web\Controller
                 ]);
             } else {
                 return $this->redirect([
-                    'elemen',
+                    'nilai',
                     'id' => $model->id_peserta
                 ]);
             }
@@ -92,13 +92,11 @@ class PenilaianController extends \yii\web\Controller
     {
         $this->layout='main-penilaian';
         $session = Yii::$app->session;
-        if(!isset($session['elemen-' . $id]))
-        {
-            return $this->goHome();
-        }
-
+       $elemen = ArrayHelper::map(Yii::$app->user->identity->userElemens,'id_elemen','id_elemen');
+      // $elemen =  ArrayHelper::getColumn($elemens, 'id_elemen'); 
+       
         $peserta=Peserta::findOne($id);
-        $indikator=Indikator::find()->where(['in','id_elemen',$session['elemen-' . $id]])->orderBy("id_elemen,id")->all();
+        $indikator=Indikator::find()->where(['in','id_elemen',$elemen])->orderBy("id_elemen,id")->all();
       //  $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
         
         $this->view->params['peserta'] = $peserta;
