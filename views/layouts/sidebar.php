@@ -39,7 +39,7 @@
     ?>
 <aside id="sidebar-wrapper">
   <div class="sidebar-brand">
-    <a href="<?=Url::to(["/"])?>">Applikasi Wawancara</a>
+    <a href="<?=Url::to(["/"])?>">Wawancara SNPDB</a>
   </div>
   <div class="sidebar-brand sidebar-brand-sm">
     <a href="<?=Url::to(["/"])?>"><i class="fa fa-record"></i></a>

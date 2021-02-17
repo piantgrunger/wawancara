@@ -9,7 +9,7 @@ use app\assets\AppAsset;
 use yii\helpers\Url;
 use app\widgets\Alert;
 
-$this->title = 'Applikasi  Wawancara ';
+$this->title = 'Wawancara SNPDB';
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

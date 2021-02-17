@@ -6,7 +6,7 @@
 
   $peserta = $this->params['peserta'];
 
-$elemen = $this->params['elemen'];
+$indikator = $this->params['indikator'];
   
 
 
@@ -33,21 +33,45 @@ $elemen = $this->params['elemen'];
    </div>
 
   <div class="card">
-  <div class="card-header">
-   <h7 class="card-title">Elemen Pertanyaan</h7>
-  </div>
   <div class="card-body">
+  <div class="row">
   <?php
-    $i=1;
-     foreach ($elemen as $item) {
+    $i=0;
+    $elemen='';
+     foreach ($indikator as $item) {
 
      
   ?>
-        <a class="btn btn-icon btn-primary btn-elemen" data-id="<?=$item->id?>" title="<?=$item->nama?>" > <?=$i?> </a>
-     
+  <?php
+
+   if($elemen != $item->id_elemen)
+   {
+     ?>
+         <p class="card-text"><?=$item->elemen->nama?></p>
+        <div class="form-group">
+  
+     <?php
+   }
+
+  ?>
+
+        <a class="btn btn-icon btn-primary btn-navigation" data-destination="<?=$i+1?>" data-id="<?=$item->id?>" title="<?=$item->nama?>" > <?=$i+1?> </a>
+
   <?php
    $i++;
+   $elemen=$item->id_elemen;
+
+   
+   if($elemen != $item->id_elemen)
+   {
+     ?>
+    </div>
+  
+     <?php
+   }
+
      }
   ?>
+  </div>
   </div></div>
 </aside>

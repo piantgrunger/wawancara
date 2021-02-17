@@ -99,10 +99,10 @@ class PenilaianController extends \yii\web\Controller
 
         $peserta=Peserta::findOne($id);
         $indikator=Indikator::find()->where(['in','id_elemen',$session['elemen-' . $id]])->orderBy("id_elemen,id")->all();
-        $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
+      //  $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
         
         $this->view->params['peserta'] = $peserta;
-        $this->view->params['elemen'] = $elemen;
+        $this->view->params['indikator'] = $indikator;
         Yii::$app->session['indikator'] = $indikator;
 
         return $this->render('nilai', [
