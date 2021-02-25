@@ -31,4 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php ActiveForm::end(); ?>
         </div>
     </div>
+  
+   <footer class="login-footer">
+         <div class="text-center">
+        <img src="https://emadrasah.kemenag.go.id/cbtsnpdb/adm/web/image/default/logo-uinsa.png" class="text-center" width="55.88px" height="58.88px" style="margin: 9px 11px">
+    </div>
+  <p class="text-center"><small>Aplikasi Wawancara v1.0<br>Copyright © 2021 Aplikasi Wawancara - UIN Sunan Ampel Surabaya</small></p>
+    </footer>
+
 </div>

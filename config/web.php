@@ -5,6 +5,7 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
+  
     'id' => 'Template',
     'name' => 'Application',
     // set target language to be Indonesia
@@ -101,6 +102,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'y2B_PhmMeo1G4hPY0dO7KfNled31dl6L',
+                 'enableCsrfValidation' => false,
+     
+          
 
         ],
         /*

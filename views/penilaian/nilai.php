@@ -1,6 +1,6 @@
 <?php
 
-use app\assets\PenilaianAsset;
+
 use app\models\DetailIndikator;
 use yii\bootstrap4\ActiveForm;
 use app\models\Nilai;
@@ -11,9 +11,9 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('app', 'Indikator Penilaian');
 $this->params['breadcrumbs'][] = $this->title;
-PenilaianAsset::register($this);
-$id_penilai = Yii::$app->user->identity->id;
+
 $peserta = $this->params['peserta'];
+$id_penilai = Yii::$app->user->identity->id;
 
 
 ?>
@@ -46,12 +46,14 @@ $peserta = $this->params['peserta'];
                 <div class="card-header h4 bg-info text-white"> Elemen : <?= $soal->elemen->nama ?></div>
                 <div class="card-header bg-primary text-white h5">Indikator : <?= $soal->nama ?></div>
                 -->
+				<div class="card-header h5 bg-dark text-white">
+					<?= $soal->pertanyaan ?>
+				  </div>
                 <div class="card-body">
 
-                    <div class="row">
-                        <p class="card-text col-md-12 h5"> <?= $soal->pertanyaan ?></p>
-                        <div class="card-text form-group h5">
-                        
+                    
+                        <ul class="list-group list-group-flush">
+							
                             <?= Html::radioList(
                                 'jawaban',
                                 Nilai::getNilaiPeserta($id_penilai, $peserta->id, $soal->id),
@@ -64,22 +66,20 @@ $peserta = $this->params['peserta'];
                                     'item' => function ($index, $label, $name, $checked, $value) use ($soal, $peserta, $nomor) {
                                         $checked = ($checked) ? 'checked' : '';
 
-                                        $return = '<label class="modal-radio">';
+                                        $return = '<li class="list-group-item">';
                                         $return .= '<input type="radio"  name="' . $name . '-' . $nomor . '" value="' . $value . '" class="radio-wawancara" data-indikator="' . $soal->id . '" data-peserta="' . $peserta->id . '" data-penilai="' . Yii::$app->user->identity->id . '" ' . $checked . ' >';
                                         $return .= '<i></i>';
                                         $return .= '<span> ' . ($label) . ' </span>';
-                                        $return .= '</label><br>';
+                                        $return .= '</li>';
 
                                         return $return;
                                     }
                                 ]
 
                             ) ?>
-
+							</ul>
     
-                        </div>
-                    </div>
-          
+                        
 
 
                 </div>

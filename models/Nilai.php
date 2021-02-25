@@ -90,4 +90,6 @@ class Nilai extends \yii\db\ActiveRecord
         $nilai= Nilai::find()->where(['id_penilai'=>$id_penilai,'id_peserta'=>$id_peserta,'id_indikator'=>$id_indikator])->one();
         return $nilai?$nilai->nilai:null;
     }
+  
+
 }

@@ -5,12 +5,12 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\Breadcrumbs;
-use app\assets\AppAsset;
+use app\assets\PenilaianAsset;
 use yii\helpers\Url;
 use app\widgets\Alert;
 
-$this->title = 'Wawancara SNPDB';
-AppAsset::register($this);
+$this->title = 'Penilaian Wawancara MAN-PK';
+PenilaianAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -62,6 +62,7 @@ AppAsset::register($this);
         <div class="main-content">
           <section class="section">
             <div class="section-header">
+           <img src="https://emadrasah.kemenag.go.id/wawancara/web/img/logo-kemenag.png" class="text-center" width="93px" height="89px">
               <?php if (isset($this->blocks['content-header'])) { ?>
               <h1><?= $this->blocks['content-header'] ?>
               </h1>
@@ -79,12 +80,12 @@ AppAsset::register($this);
               </h1>
               <?php } ?>
 
-              <?=
+              <!--?=
         Breadcrumbs::widget(
             [
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]
-        ) ?>
+        ) ?-->
             </div>
             <div class="section-body">
               <?=Alert::widget()?>
@@ -95,7 +96,9 @@ AppAsset::register($this);
 
         </div>
         <footer class="main-footer">
-
+          
+                
+   
         </footer>
       </div>
     </div>

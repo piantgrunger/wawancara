@@ -116,6 +116,7 @@ class UserController extends Controller
 		$model = new User();
 
 		if ($model->load(Yii::$app->request->post())) {
+      $model->auth_key ='1111';
 			$model->setPassword('123456');
 			$model->status = $model->status==1?10:0;
 			if ($model->save()) {

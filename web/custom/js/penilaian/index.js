@@ -30,7 +30,9 @@ $(_RADIOWAWANCARA).click(function(o){
   });
 
    req.done(function(data) {
-     target.prop('checked',true);
+      $("#btn-"+indikator).removeClass('btn-secondary');
+      $("#btn-"+indikator).addClass('btn-success');
+     
   })
 
 

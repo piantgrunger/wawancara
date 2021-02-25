@@ -9,7 +9,7 @@ use app\assets\AppAsset;
 use yii\helpers\Url;
 use app\widgets\Alert;
 
-$this->title = 'Wawancara SNPDB';
+$this->title = 'Aplikasi Wawancara SNPDB 2021';
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -39,19 +39,6 @@ AppAsset::register($this);
         </nav>
 
         <?php if (Yii::$app->user->isGuest) { ?>
-        <nav class="navbar navbar-secondary navbar-expand-lg">
-       
- 
-          <div class="container">
-            <ul class="navbar-nav">
-                <li class="nav-item ">
-                <a href="<?=Url::to(['/'])?>"
-                  class="nav-link"><i class="fa fa-home"></i><span>Beranda</span></a>
-              </li>
-
-            </ul>
-          </div>
-        </nav>
         <?php } ?>
 
         <?php if (!Yii::$app->user->isGuest) { ?>
@@ -64,6 +51,8 @@ AppAsset::register($this);
         <div class="main-content">
           <section class="section">
             <div class="section-header">
+                <img src="https://emadrasah.kemenag.go.id/wawancara/web/img/logo-kemenag.png" class="text-center" width="93px" height="89px">
+          
               <?php if (isset($this->blocks['content-header'])) { ?>
               <h1><?= $this->blocks['content-header'] ?>
               </h1>
@@ -80,13 +69,13 @@ AppAsset::register($this);
                 } ?>
               </h1>
               <?php } ?>
-
+<!--
               <?=
         Breadcrumbs::widget(
             [
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]
-        ) ?>
+        ) ?>-->
             </div>
             <div class="section-body">
               <?=Alert::widget()?>
@@ -97,8 +86,7 @@ AppAsset::register($this);
 
         </div>
         <footer class="main-footer">
-
-        </footer>
+       </footer>
       </div>
     </div>
 

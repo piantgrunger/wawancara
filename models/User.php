@@ -141,6 +141,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
+  
+    public static function findByUsernameMadrasah($username,$id_sekolah)
+    {
+        return static::findOne(['username' => $username, 'id_sekolah'=>$id_sekolah,'status' => self::STATUS_ACTIVE]);
+    }
+  
 
     /**
      * Finds user by password reset token
@@ -250,4 +256,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(UserElemen::className(), ['id_user' => 'id']);
     }
+  
+   public function getSekolah()
+   {
+     return $this->hasOne(Sekolah::className(),['id'=>'id_sekolah']);
+   }  
 }

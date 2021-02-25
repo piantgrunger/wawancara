@@ -2,6 +2,9 @@
   use yii\helpers\Url;
 
   use hscstudio\mimin\components\Mimin;
+use app\models\Nilai;
+$id_penilai = Yii::$app->user->identity->id;
+
 
 
   $peserta = $this->params['peserta'];
@@ -35,36 +38,43 @@ $indikator = $this->params['indikator'];
   <div class="card">
   <div class="card-body">
   <div class="row">
-  <div class="form-group">
   <?php
     $i=0;
     $elemen='';
-
      foreach ($indikator as $item) {
 
      
   ?>
- 
+  <?php
 
- 
+   if($elemen != $item->id_elemen)
+   {
+     ?>
+         <p class="card-text"><?=$item->elemen->nama?></p>
+        <div class="form-group">
   
+     <?php
+   }
+
+  ?>
+
+        <a id=btn-<?=$item->id?> class="btn btn-icon <?=Nilai::getNilaiPeserta($id_penilai, $peserta->id, $item->id)==null?"btn-secondary":"btn-success" ?> btn-navigation" data-destination="<?=$i+1?>" data-id="<?=$item->id?>" title="<?=$item->nama?>" > <?=$i+1?> </a>
+
+  <?php
+   $i++;
+   $elemen=$item->id_elemen;
+
+   
+   if($elemen != $item->id_elemen)
+   {
+     ?>
+    </div>
   
-  
+     <?php
+   }
 
-
-        <a class="btn btn-icon btn-primary btn-navigation" data-destination="<?=$i+1?>" data-id="<?=$item->id?>" title="<?=$item->nama?>" > <?=$i+1?> </a>
-
-
-
-    <?php
-    $i++;
      }
-    ?>
-
-      
-</div>
-  
-    
+  ?>
   </div>
   </div></div>
 </aside>

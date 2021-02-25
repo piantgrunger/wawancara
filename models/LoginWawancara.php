@@ -44,6 +44,7 @@ class LoginWawancara extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user) {
+              /*
                $user = new User;
                $user->username = $this->username;
                $user->setPassword($this->tanggal_lahir);
@@ -58,8 +59,11 @@ class LoginWawancara extends Model
                $authAssignment->save(false);
 
                $this->_user=$user;
+               */
+                    $this->addError($attribute,'Nama,Madrasah dan Tanggal Lahir Tidak Sesuai');
+
             } else {
-                if(($user->tanggal_lahir!=$this->tanggal_lahir) || ($user->id_sekolah != $this->id_sekolah))
+                if(($user->tanggal_lahir!=$this->tanggal_lahir) )
                 {
                     $this->addError($attribute,'Nama,Madrasah dan Tanggal Lahir Tidak Sesuai');
 
@@ -90,7 +94,7 @@ class LoginWawancara extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByUsernameMadrasah($this->username,$this->id_sekolah);
         }
 
         return $this->_user;
