@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\SwitchInput;
+use yii\widgets\MaskedInput;
+use yii\helpers\ArrayHelper;
+use app\models\Sekolah;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\administrator\models\User */
@@ -16,16 +20,24 @@ use kartik\widgets\SwitchInput;
 	<?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
 	<?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-	<?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
-	<?= $form->field($model, 'nip')->textInput(['maxlength' => true]) ?>
-	<?= $form->field($model, 'nidn')->textInput(['maxlength' => true]) ?>
-
+	
 	<?= $form->field($model, 'status')->widget(SwitchInput::classname(), [
-		'pluginOptions' => [
-			'onText' => 'Aktif',
-			'offText' => 'Non Aktif',
-		]
-	]) ?>
+        'pluginOptions' => [
+            'onText' => 'Aktif',
+            'offText' => 'Non Aktif',
+        ]
+    ]) ?>
+
+<?= $form->field($model, 'tanggal_lahir')->widget(MaskedInput::className(), [
+                'mask' =>'9999-99-99',
+                'id'=> 'tanggal_lahir'
+            ])->label('Tanggal Lahir (2001-02-25)') ?>
+<?= $form->field($model, 'id_sekolah')->widget(Select2::className(), [
+        'data' =>(ArrayHelper::map(Sekolah::find()->asArray()->all(), 'id', 'nama')),
+        'options' => [
+        'placeholder' => 'Pilih Madrasah ...',
+        ],])->label('Madrasah')
+ ?>
 
 	
 		<strong> Leave blank if not change password</strong>
