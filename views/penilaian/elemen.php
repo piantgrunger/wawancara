@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->errorSummary($model) ?> <!-- ADDED HERE -->
  
 
-            <?= $form->field($model, 'elemen')->checkboxList($elemen,[
+            <?= $form->field($model, 'elemen')->checkboxList($elemen, [
                 
             ])->label(false) ?>
 

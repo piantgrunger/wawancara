@@ -3,6 +3,7 @@
 
   use hscstudio\mimin\components\Mimin;
 use app\models\Nilai;
+
 $id_penilai = Yii::$app->user->identity->id;
 
 
@@ -10,6 +11,7 @@ $id_penilai = Yii::$app->user->identity->id;
   $peserta = $this->params['peserta'];
 
 $indikator = $this->params['indikator'];
+$waktu = $this->params['waktu'];
   
 
 
@@ -33,46 +35,47 @@ $indikator = $this->params['indikator'];
                            
                             </div>
                           </div>  
+
+
    </div>
 
   <div class="card">
+    <div class="card-header">
+             <div id="blok-sisa-waktu" data-waktu="<?=$waktu?>" data-url="<?= Url::to(['api/waktu']) ?>" data-peserta=<?=$peserta->id?> data-penilai="<?=$id_penilai?>"></div>      
+      
+
+
+    </div>
   <div class="card-body">
-  <div class="row">
+  <div class="row d-none" id="card-soal">
   <?php
     $i=0;
     $elemen='';
      foreach ($indikator as $item) {
-
-     
-  ?>
+         ?>
   <?php
 
-   if($elemen != $item->id_elemen)
-   {
-     ?>
+   if ($elemen != $item->id_elemen) {
+       ?>
          <p class="card-text"><?=$item->elemen->nama?></p>
         <div class="form-group">
   
      <?php
-   }
-
-  ?>
+   } ?>
 
         <a id=btn-<?=$item->id?> class="btn btn-icon <?=Nilai::getNilaiPeserta($id_penilai, $peserta->id, $item->id)==null?"btn-secondary":"btn-success" ?> btn-navigation" data-destination="<?=$i+1?>" data-id="<?=$item->id?>" title="<?=$item->nama?>" > <?=$i+1?> </a>
 
   <?php
    $i++;
-   $elemen=$item->id_elemen;
+         $elemen=$item->id_elemen;
 
    
-   if($elemen != $item->id_elemen)
-   {
-     ?>
+         if ($elemen != $item->id_elemen) {
+             ?>
     </div>
   
      <?php
-   }
-
+         }
      }
   ?>
   </div>

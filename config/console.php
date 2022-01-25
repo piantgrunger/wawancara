@@ -23,7 +23,7 @@ $config = [
             ],
         ],
         'db' => $db,
-		'authManager'  => [
+        'authManager'  => [
             'class'        => 'yii\rbac\DbManager',
         ],
     ],

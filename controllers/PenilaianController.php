@@ -1,12 +1,14 @@
 <?php
 
 namespace app\controllers;
+
 use Yii;
 
 use app\models\Elemen;
 use app\models\Indikator;
 use app\models\Nilai;
 use app\models\Peserta;
+use app\models\Timer;
 use yii\base\DynamicModel;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -65,8 +67,6 @@ class PenilaianController extends \yii\web\Controller
 
     public function actionElemen($id)
     {
-      
- 
         $peserta = Peserta::findOne($id);
         $elemen = ArrayHelper::map((Elemen::find()->asArray()->all()), 'id', 'nama');
         $model = new \yii\base\DynamicModel([
@@ -92,12 +92,21 @@ class PenilaianController extends \yii\web\Controller
     {
         $this->layout='main-penilaian';
         $session = Yii::$app->session;
-       $elemen = ArrayHelper::map(Yii::$app->user->identity->userElemens,'id_elemen','id_elemen');
-      // $elemen =  ArrayHelper::getColumn($elemens, 'id_elemen'); 
+        $elemen = ArrayHelper::map(Yii::$app->user->identity->userElemens, 'id_elemen', 'id_elemen');
+        $waktu = Timer::find()->where(['id_peserta' => $id,'id_penilai'=>Yii::$app->user->identity->id])->one();
+        if (!$waktu) {
+            $waktu = new Timer();
+            $waktu->id_peserta = $id;
+            $waktu->id_penilai = Yii::$app->user->identity->id;
+            $waktu->sisawaktu = Yii::$app->params['waktuWawancara'];
+            $waktu->save();
+        }
+        // $elemen =  ArrayHelper::getColumn($elemens, 'id_elemen');
        
         $peserta=Peserta::findOne($id);
         $indikator=Indikator::find()->where(['in','id_elemen',$elemen])->orderBy("id_elemen,id")->all();
-      //  $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
+        $this->view->params['waktu'] = $waktu->sisawaktu;
+        //  $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
         
         $this->view->params['peserta'] = $peserta;
         $this->view->params['indikator'] = $indikator;
@@ -108,27 +117,19 @@ class PenilaianController extends \yii\web\Controller
             'indikator' => $indikator,
     
         ]);
-
-
     }
-    public function actionFinish($id) {
-
-        if(isset(Yii::$app->session['indikator'])) {
-           $indikator = Yii::$app->session['indikator'];
-           foreach($indikator as $data) {
-              $nilai =  Nilai::find()->where(['id_penilai'=>Yii::$app->user->identity,'id_indikator'=>$data->id,'id_peserta'=>$id ])->one();
-              if($nilai)
-              {
-                  $nilai->status=2;
-                  $nilai->save(false);
-              }
-
-
-           }
-
-
+    public function actionFinish($id)
+    {
+        if (isset(Yii::$app->session['indikator'])) {
+            $indikator = Yii::$app->session['indikator'];
+            foreach ($indikator as $data) {
+                $nilai =  Nilai::find()->where(['id_penilai'=>Yii::$app->user->identity,'id_indikator'=>$data->id,'id_peserta'=>$id ])->one();
+                if ($nilai) {
+                    $nilai->status=2;
+                    $nilai->save(false);
+                }
+            }
         }
-       return $this->goHome();
+        return $this->goHome();
     }
 }
-
