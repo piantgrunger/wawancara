@@ -4,12 +4,11 @@ use yii\bootstrap4\ActiveForm;
 /* @var $this yii\web\View */
 use yii\widgets\MaskedInput;
 
-$this->title = Yii::t('app', 'Penilaian');
+$this->title = Yii::t('app', 'Wawancara');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div>
-    <h1><?= Html::encode($this->title) ?></h1>
     <h4>Masukkan Data Anda</h4>
 
     <div class="row h5">

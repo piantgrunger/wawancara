@@ -11,6 +11,7 @@ use yii\widgets\MaskedInput;
 use yii\helpers\ArrayHelper;
 use app\models\Sekolah;
 use kartik\select2\Select2;
+use yii\helpers\Url;
 
 $this->title = 'Laman Pewawancara';
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
+      
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
             <?= $form->field($model, 'username')->label('Nama Lengkap') ?>
@@ -40,8 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="form-group">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <a href="<?=Url::to(["vid-call"])?>" class="btn btn-success">Wawancara Peserta</a>
+
 
             </div>
+            
 
             <?php ActiveForm::end(); ?>
         </div>
