@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <h4>Masukkan Data Peserta yang Di Nilai</h4>
+    <h4>Masukkan Data Anda</h4>
 
     <div class="row h5">
         <div class="col-lg-5">
@@ -25,14 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id'=> 'tanggal_lahir'
             ])->label('Tanggal Lahir (2001-02-25)') ?>
 
-            <?= $form->field($model, 'zoom_id') ?>
-
+          
 
 
 
 
             <div class="form-group">
-                <?= Html::submitButton('Mulai Penilaian', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Mulai Wawancara', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 
             </div>
 

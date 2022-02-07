@@ -179,7 +179,7 @@ function run_clock(id, endtime) {
       updateTimer(0);
       alert('Waktu habis.');
       clearInterval(timeinterval);
-      location.href = '/';
+      location.href = 'index';
     }
   }
   update_clock();

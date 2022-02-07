@@ -51,6 +51,8 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+
+     
     public function actions()
     {
         return [
@@ -74,6 +76,46 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionVidCall()
+    {
+        $model = new \yii\base\DynamicModel([
+            'no_peserta', 'tanggal_lahir', 'id_peserta'
+        ]);
+        $model->addRule(['no_peserta', 'tanggal_lahir'], 'required');
+        $model->addRule(['id_peserta'], 'safe');
+
+        $model->addRule('tanggal_lahir', function ($attribute, $params) use ($model) {
+            $peserta = \app\models\Peserta::find()->where(['nopeserta' => $model->no_peserta, 'tgl_lahir' => $model->tanggal_lahir])->one();
+            if (!$peserta) {
+                $model->addError('error', 'Peserta Tidak Ditemukan');
+            } else {
+                $zoom_id = $peserta->zoom_id;
+                if ($zoom_id == null) {
+                    $model->addError('error', 'Zoom Belum Ditemukan Harap Hubungi Admin');
+                }
+            }
+        });
+        if ($model->load(\Yii::$app->request->post())) {
+            if (!$model->validate()) {
+                return $this->render('vidcall', [
+                    'model' => $model
+                ]);
+            } else {
+                $peserta = \app\models\Peserta::find()->where(['nopeserta' => $model->no_peserta, 'tgl_lahir' => $model->tanggal_lahir])->one();
+        
+                return $this->redirect([
+                    '/penilaian/vicon',
+                    'zoom_id' => $peserta->zoom_id
+
+                ]);
+            }
+        }
+
+
+        return $this->render('vidcall', [
+            'model' => $model
+        ]);
+    }
     /**
      * Logs in a user.
      *

@@ -20,7 +20,9 @@ $config = [
         'datecontrol/*',
         'site/login',
         'site/logout',
-        'debug/*',
+        'penilaian/vicon',
+        'site/vid-call' ,
+            'debug/*',
         'mimin/*', // only in dev mode
     ],
 ],

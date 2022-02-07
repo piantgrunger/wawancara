@@ -32,10 +32,10 @@ class PenilaianController extends \yii\web\Controller
     public function actionIndex()
     {
         $model = new \yii\base\DynamicModel([
-            'no_peserta', 'tanggal_lahir', 'id_peserta'
+            'no_peserta', 'tanggal_lahir', 'id_peserta','zoom_id'
         ]);
         $model->addRule(['no_peserta', 'tanggal_lahir'], 'required');
-        $model->addRule(['id_peserta'], 'safe');
+        $model->addRule(['id_peserta','zoom_id'], 'safe');
 
         $model->addRule('tanggal_lahir', function ($attribute, $params) use ($model) {
             $peserta = \app\models\Peserta::find()->where(['nopeserta' => $model->no_peserta, 'tgl_lahir' => $model->tanggal_lahir])->one();
@@ -54,7 +54,9 @@ class PenilaianController extends \yii\web\Controller
             } else {
                 return $this->redirect([
                     'nilai',
-                    'id' => $model->id_peserta
+                    'id' => $model->id_peserta,
+                    'zoom_id' => $model->zoom_id
+
                 ]);
             }
         }
@@ -63,6 +65,11 @@ class PenilaianController extends \yii\web\Controller
         return $this->render('index', [
             'model' => $model
         ]);
+    }
+
+    public function actionVicon($zoom_id)
+    {
+        return $this->render('vicon', ['zoom_id' => $zoom_id]);
     }
 
     public function actionElemen($id)
@@ -88,7 +95,7 @@ class PenilaianController extends \yii\web\Controller
         ]);
     }
 
-    public function actionNilai($id)
+    public function actionNilai($id, $zoom_id='')
     {
         $this->layout='main-penilaian';
         $session = Yii::$app->session;
@@ -104,11 +111,14 @@ class PenilaianController extends \yii\web\Controller
         // $elemen =  ArrayHelper::getColumn($elemens, 'id_elemen');
        
         $peserta=Peserta::findOne($id);
+        $peserta->zoom_id = $zoom_id;
+        $peserta->save(false);
         $indikator=Indikator::find()->where(['in','id_elemen',$elemen])->orderBy("id_elemen,id")->all();
         $this->view->params['waktu'] = $waktu->sisawaktu;
         //  $elemen=\app\models\Elemen::find()->where(['in','id',$session['elemen-' . $id]])->all();
         
         $this->view->params['peserta'] = $peserta;
+        $this->view->params['zoom_id'] = $zoom_id;
         $this->view->params['indikator'] = $indikator;
         Yii::$app->session['indikator'] = $indikator;
 

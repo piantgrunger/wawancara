@@ -9,6 +9,7 @@ $id_penilai = Yii::$app->user->identity->id;
 
 
   $peserta = $this->params['peserta'];
+  $zoom_id = $this->params['zoom_id'];
 
 $indikator = $this->params['indikator'];
 $waktu = $this->params['waktu'];
@@ -34,10 +35,13 @@ $waktu = $this->params['waktu'];
                             <div class="user-cta">
                            
                             </div>
+                            <a href="<?=Url::to(["vicon" ,'zoom_id'=>$zoom_id])?>" target="_blank" class="btn btn-primary ">Video Call</a>
                           </div>  
 
 
    </div>
+
+
 
   <div class="card">
     <div class="card-header">
